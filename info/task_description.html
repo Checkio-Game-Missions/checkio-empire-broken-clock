@@ -1,39 +1,55 @@
-<p>
-    <i>( Describe task in general )</i>
-</p>
+<div class="story">
+    <p>“Okay guys. I need some help finding parts for the clock on the bridge.” Nikola told Stephen and Sofia. “It’s
+        always reading the wrong time and we really ought to do something about it.”</p>
+
+    <p>“Can’t we just use any old clock?” Stephen asked? “They all tell time the same.”</p>
+
+    <p>“Well, not exactly. The bridge clock is hooked up to the Oddessyus’ main computer. I noticed slight aberrations
+        in the day/night cycles and took a look at it. It seems that it is adding or removing different units of time.
+        I’m not sure which yet which is why I need your help. Since it is tied to the computer, we can’t just replace
+        it, we need to get some parts together to help us recognize and correct differences in time readouts.”</p>
+
+    <p>“Erm, could you explain that in BASIC?” </p>
+
+    <p>“Sigh. The clock is broken, we can’t fix it with a new clock. We need to build a function that will account for
+        the discrepancy...” Sofia interjected.</p>
+
+    <p>“Uh, yeah, what she said.” Nikola stammered.</p>
+</div>
 
 <p>
-    Sum two passed ints
+    The Odysseus has a broken clock. We know how quickly it runs or lags over a certain period of time. At first, the
+    clock is set to the correct time, but after a while the clock begins to display an incorrect time... Help Nikola to
+    determine the correct time. Time is measured in a 24 hour format (1AM is 01:00:00 and 3PM is 15:00:00). The start
+    and end time is within the same day. The result is rounded down to the nearest second (use floor or int).
 </p>
 
-<p style="text-align: center;">
-    <img class="for_info_only" title="example" src="{{MEDIA}}example.png" alt="example" width="392px"/>
-    <img class="for_editor_only" title="example" src="{{MEDIA}}example.png" alt="example" width="380px"/>
-</p>
+<img class="for_info_only" src="{{ MEDIA }}broken-clock.png" width="600px"
+     alt="broken-clock">
+<img class="for_editor_only" src="{{ MEDIA }}broken-clock.png" width="380px"
+     alt="broken-clock">
 
-<p><i>( Explain input and output values )</i></p>
-<p>
-    <strong>Input: </strong> Two arguments. Both are int
-</p>
+<p><strong>Input:</strong>A list of 3 strings. First string--start time. Second string--end (incorrect) time. Time is
+    given in the format "hh:mm:ss" (Examples: "01:16:59" and "23:00:13"). Third string is a description of the clock
+    error in the format "+(-)N [second, minute, hour](s) at M [second, minute, hour](s)" (Example: "+1 second at 10
+    seconds"--the clock is 1 second fast for every 10 seconds of the real time period and "-5 minutes at 5 hours"--the
+    clock lags 5 minutes for every 5 hours of actual time."</p>
 
-<p>
-    <strong>Output: </strong> Int. 
-</p>
-
-
+<p><strong>Output:</strong>The real time. String in the format "hh:mm:ss." The
+    result is rounded down to the nearest second (Example: "00:00:01.9" =
+    "00:00:01").</p>
 
 <div class="for_info_only">
-    <p><i>( Put some usage examples )</i></p>
-    <p>
-        <strong>Example:</strong>
-    </p>
-    <pre class="brush: python">
-checkio(3, 2) == 5
-checkio(5, 7) == 12
-    </pre>
+    <strong>Example:</strong>
+<pre class="brush:python">checkio(['00:00:00', '00:00:15', '+5 seconds at 10 seconds']) ==  '00:00:10'
+checkio(['06:10:00', '06:10:15', '-5 seconds at 10 seconds']) ==  '06:10:30'
+checkio(['13:00:00', '14:01:00', '+1 second at 1 minute']) ==  '14:00:00'
+checkio(['01:05:05', '04:05:05', '-1 hour at 2 hours']) ==  '07:05:05'
+checkio(['00:00:00', '00:00:30', '+2 seconds at 6 seconds']) ==  '00:00:22'
+</pre>
 </div>
 
 <p class="for_info_only">
     <strong>How it is used: </strong>
-    <i>(Here you can explain how it can be used in development and what is usage of this.)</i>
+    Here you can learn how to work with time (for example datetime)
 </p>
