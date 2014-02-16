@@ -24,6 +24,22 @@
     and end times fall on the same day. The result should be rounded down to the nearest second (use floor or int).
 </p>
 
+<p>
+    Let's examine one example -- '00:00:00', '00:00:30', '+2 seconds at 6 seconds'.<br>
+    0th step: The real and fake time is "00:00:00".<br>
+    When the real time is "00:00:06", the fake time is "00:00:08".<br>
+
+    At real "00:00:18", fake is "00:00:24".<br>
+
+    At real "00:00:21", fake is "00:00:28".<br>
+
+    At real "00:00:22", fake is "00:00:29.333...".<br>
+
+    At real "00:00:22.5", fake is "00:00:30".<br>
+
+    So answer is "00:00:22.5" after rounding down "00:00:22"
+</p>
+
 <img class="for_info_only" src="{{ MEDIA }}broken-clock.png" width="600px"
      alt="broken-clock">
 <img class="for_editor_only" src="{{ MEDIA }}broken-clock.png" width="380px"
@@ -51,5 +67,5 @@ checkio(['00:00:00', '00:00:30', '+2 seconds at 6 seconds']) ==  '00:00:22'
 
 <p class="for_info_only">
     <strong>How it is used: </strong>
-    Here you can learn how to work with time (for example datetime)
+    Here you can learn how to work with time (for example datetime).
 </p>
