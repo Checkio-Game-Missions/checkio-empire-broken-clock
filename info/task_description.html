@@ -1,29 +1,26 @@
-<div class="story">
-    <p>“Okay guys. I need some help finding parts for the clock on the bridge.” Nikola told Stephen and Sofia. “It’s
-        always reading the wrong time and we really ought to do something about it.”</p>
-
-    <p>“Can’t we just use any old clock?” Stephen asked? “They all tell time the same.”</p>
-
-    <p>“Well, not exactly. The bridge clock is hooked up to the Oddessyus’ main computer. I noticed slight aberrations
-        in the day/night cycles and took a look at it. It seems that it is adding or removing different units of time.
-        I’m not sure which yet which is why I need your help. Since it is tied to the computer, we can’t just replace
-        it, we need to get some parts together to help us recognize and correct differences in time readouts.”</p>
-
-    <p>“Erm, could you explain that in plain BASIC?” </p>
-
-    <p>“Sigh. The clock is broken, we can’t fix it with a new clock. We need to build a function that will account for
-        the discrepancy...” Sofia interjected.</p>
-
-    <p>“Uh, yeah, what she said.” Nikola stammered.</p>
-</div>
-
 <p>
-    The ship has a broken clock; we know how quickly it runs or lags over a certain period of time. At first, the
-    clock is set to the correct time, but after a while it begins to display an incorrect time... We need you to help Nikola
-    determine the correct time. Time is measured in a 24 hour format (1AM is 01:00:00 and 3PM is 15:00:00). The start
-    and end times fall on the same day. The result should be rounded down to the nearest second (use floor or int).
+    We have a broken clock; we know how quickly it runs or lags over a certain period of time.
+    At first, the clock is set to the correct time, but after a while it begins to display an
+    incorrect time...
+    But instead to correct clock each time we will use the Algorithm to calculate correct time by
+    looking at the wrong time. Of course we will correct time each days so don't worry and
+    The etalon and current times fall on the same day. Time is measured in a 24 hour format.
 </p>
-
+<p>
+    Your are given three values.
+    The first is etalon or start correct time.
+    The second is current time on the broken clock (wrong).
+    Time is given as strings in the format "hh:mm:ss" (Examples: "01:16:59" and "23:00:13").
+    The third is a description of the clock error in the format
+    <strong>"+(-)N [second, minute, hour](s) at M [second, minute, hour](s)"</strong>.
+    For Example "+1 second at 10 seconds" -- the clock is 1 second fast for every 10 seconds
+    of the real time period and "-5 minutes at 5 hours" -- the clock lags 5 minutes
+    for every 5 hours of actual time.
+</p>
+<p>
+    You should calculate the real time with the given values.
+    The result should be rounded down to the nearest second (use floor or int).
+</p>
 <p>
     Let's examine one example -- '00:00:00', '00:00:30', '+2 seconds at 6 seconds'.<br>
     0th step: The real and fake time is "00:00:00".<br>
@@ -40,32 +37,35 @@
     So answer is "00:00:22.5" after rounding down "00:00:22"
 </p>
 
-<img class="for_info_only" src="{{ MEDIA }}broken-clock.png" width="600px"
-     alt="broken-clock">
-<img class="for_editor_only" src="{{ MEDIA }}broken-clock.png" width="380px"
-     alt="broken-clock">
 
-<p><strong>Input:</strong>A list of 3 strings. First string--start time. Second string--end (incorrect) time. Time is
-    given in the format "hh:mm:ss" (Examples: "01:16:59" and "23:00:13"). Third string is a description of the clock
-    error in the format "+(-)N [second, minute, hour](s) at M [second, minute, hour](s)" (Example: "+1 second at 10
-    seconds"--the clock is 1 second fast for every 10 seconds of the real time period and "-5 minutes at 5 hours"--the
-    clock lags 5 minutes for every 5 hours of actual time."</p>
+<p>
+    <strong>Input:</strong>
+    Three arguments.
+    Start etalon time, current wrong time and broken clock descriptions as strings.
+</p>
 
-<p><strong>Output:</strong>The real time. String in the format "hh:mm:ss." The
-    result is rounded down to the nearest second (Example: "00:00:01.9" =
-    "00:00:01").</p>
+<p>
+    <strong>Output:</strong> The real time as a string.
+</p>
 
 <div class="for_info_only">
     <strong>Example:</strong>
-<pre class="brush:python">checkio(['00:00:00', '00:00:15', '+5 seconds at 10 seconds']) ==  '00:00:10'
-checkio(['06:10:00', '06:10:15', '-5 seconds at 10 seconds']) ==  '06:10:30'
-checkio(['13:00:00', '14:01:00', '+1 second at 1 minute']) ==  '14:00:00'
-checkio(['01:05:05', '04:05:05', '-1 hour at 2 hours']) ==  '07:05:05'
-checkio(['00:00:00', '00:00:30', '+2 seconds at 6 seconds']) ==  '00:00:22'
-</pre>
+<textarea data-code="python">broken_clock('00:00:00', '00:00:15', '+5 seconds at 10 seconds') ==  '00:00:10'
+broken_clock('06:10:00', '06:10:15', '-5 seconds at 10 seconds') ==  '06:10:30'
+broken_clock('13:00:00', '14:01:00', '+1 second at 1 minute') ==  '14:00:00'
+broken_clock('01:05:05', '04:05:05', '-1 hour at 2 hours') ==  '07:05:05'
+broken_clock('00:00:00', '00:00:30', '+2 seconds at 6 seconds') ==  '00:00:22'
+</textarea>
 </div>
 
 <p class="for_info_only">
     <strong>How it is used: </strong>
-    Here you can learn how to work with time (for example datetime).
+    Here you can learn how to work with time and model process with
+    various time flow.
+</p>
+
+<p>
+    <strong>Precondition:</strong><br>
+    "wrong_time" is later than "etalon_time".
+
 </p>
