@@ -1,6 +1,6 @@
 //Dont change it
-requirejs(['ext_editor_1', 'jquery_190', 'raphael_210'],
-    function (ext, $, TableComponent) {
+requirejs(['ext_editor_1', 'jquery_190', 'raphael_210', 'snap.svg_030'],
+    function (ext, $, Raphael, Snap) {
 
         var cur_slide = {};
 
@@ -8,7 +8,9 @@ requirejs(['ext_editor_1', 'jquery_190', 'raphael_210'],
         });
 
         ext.set_process_in(function (this_e, data) {
+            cur_slide = {};
             cur_slide["in"] = data[0];
+            this_e.addAnimationSlide(cur_slide);
         });
 
         ext.set_process_out(function (this_e, data) {
@@ -17,8 +19,6 @@ requirejs(['ext_editor_1', 'jquery_190', 'raphael_210'],
 
         ext.set_process_ext(function (this_e, data) {
             cur_slide.ext = data;
-            this_e.addAnimationSlide(cur_slide);
-            cur_slide = {};
         });
 
         ext.set_process_err(function (this_e, data) {
@@ -39,43 +39,60 @@ requirejs(['ext_editor_1', 'jquery_190', 'raphael_210'],
                 return false;
             }
 
-            var checkioInput = data.in;
+            //YOUR FUNCTION NAME
+            var fname = 'broken_clock';
 
-            if (data.error) {
-                $content.find('.call').html('Fail: checkio(' + JSON.stringify(checkioInput) + ')');
-                $content.find('.output').html(data.error.replace(/\n/g, ","));
+            var checkioInput = data.in || ["00:00:00", "00:00:15", "+5 seconds at 10 seconds"];
+            var checkioInputStr = fname + '(' + checkioInput.map(JSON.stringify).join(", ") + ')';
+
+            var failError = function (dError) {
+                $content.find('.call').html(checkioInputStr);
+                $content.find('.output').html(dError.replace(/\n/g, ","));
 
                 $content.find('.output').addClass('error');
                 $content.find('.call').addClass('error');
                 $content.find('.answer').remove();
                 $content.find('.explanation').remove();
                 this_e.setAnimationHeight($content.height() + 60);
+            };
+
+            if (data.error) {
+                failError(data.error);
                 return false;
             }
 
-            var rightResult = data.ext["answer"];
-            var userResult = data.out;
-            var result = data.ext["result"];
-            var result_addon = data.ext["result_addon"];
+            if (data.ext && data.ext.inspector_fail) {
+                failError(data.ext.inspector_result_addon);
+                return false;
+            }
+
+            $content.find('.call').html(checkioInputStr);
+            $content.find('.output').html('Working...');
 
 
-            //if you need additional info from tests (if exists)
-            var explanation = data.ext["explanation"];
+            if (data.ext) {
+                var rightResult = data.ext["answer"];
+                var userResult = data.out;
+                var result = data.ext["result"];
+                var result_addon = data.ext["result_addon"];
 
-            $content.find('.output').html('&nbsp;Your result:&nbsp;' + JSON.stringify(userResult));
-
-            if (!result) {
-                $content.find('.call').html('Fail: checkio(' + JSON.stringify(checkioInput) + ')');
-                $content.find('.answer').html('Right result:&nbsp;' + JSON.stringify(rightResult));
-                $content.find('.answer').addClass('error');
-                $content.find('.output').addClass('error');
-                $content.find('.call').addClass('error');
+                //if you need additional info from tests (if exists)
+                var explanation = data.ext["explanation"];
+                $content.find('.output').html('&nbsp;Your result:&nbsp;' + JSON.stringify(userResult));
+                if (!result) {
+                    $content.find('.answer').html('Right result:&nbsp;' + JSON.stringify(rightResult));
+                    $content.find('.answer').addClass('error');
+                    $content.find('.output').addClass('error');
+                    $content.find('.call').addClass('error');
+                }
+                else {
+                    $content.find('.answer').remove();
+                }
             }
             else {
-                $content.find('.call').html('Pass: checkio(' + JSON.stringify(checkioInput) + ')');
                 $content.find('.answer').remove();
             }
-            //Dont change the code before it
+
 
             //Your code here about test explanation animation
             //$content.find(".explanation").html("Something text for example");
@@ -90,7 +107,19 @@ requirejs(['ext_editor_1', 'jquery_190', 'raphael_210'],
 
         });
 
-       
+        //This is for Tryit (but not necessary)
+//        var $tryit;
+//        ext.set_console_process_ret(function (this_e, ret) {
+//            $tryit.find(".checkio-result").html("Result<br>" + ret);
+//        });
+//
+//        ext.set_generate_animation_panel(function (this_e) {
+//            $tryit = $(this_e.setHtmlTryIt(ext.get_template('tryit'))).find('.tryit-content');
+//            $tryit.find('.bn-check').click(function (e) {
+//                e.preventDefault();
+//                this_e.sendToConsoleCheckiO("something");
+//            });
+//        });
 
         var colorOrange4 = "#F0801A";
         var colorOrange3 = "#FA8F00";
