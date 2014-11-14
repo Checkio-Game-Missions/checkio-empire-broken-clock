@@ -1,4 +1,4 @@
-def broken_clock(etalon_time, wrong_time, error_description):
+def broken_clock(starting_time, wrong_time, error_description):
     return "00:59:59"
 
 #These "asserts" using only for self-checking and not necessary for auto-testing

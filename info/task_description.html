@@ -1,21 +1,23 @@
 <p>
-    We have a broken clock; we know how quickly it runs or lags over a certain period of time.
-    At first, the clock is set to the correct time, but after a while it begins to display an
-    incorrect time...
-    But instead to correct clock each time we will use the Algorithm to calculate correct time by
-    looking at the wrong time. Of course we will correct time each days so don't worry and
-    The etalon and current times fall on the same day. Time is measured in a 24 hour format.
+    We have a broken clock. We know how quickly it runs or lags over a specific period of time.
+    At first, the clock is set to the correct time, but after a while it begins
+    to display an incorrect time... But instead of correcting the clock each time, 
+    we will use an algorithm to calculate the correct time by accounting for 
+    the difference compared to the actual current time. Of course we will have access to 
+    the correct time for each day. In addition, you can be certain that 
+    the correct starting time and current actual time fall on the same day. 
+    For this mission, time is measured in a 24 hour format.
 </p>
 <p>
-    Your are given three values.
-    The first is etalon or start correct time.
-    The second is current time on the broken clock (wrong).
+    You are given three values.
+    The first is the correct starting time. 
+    The second is the current time displayed on the broken clock (which is incorrect). 
     Time is given as strings in the format "hh:mm:ss" (Examples: "01:16:59" and "23:00:13").
-    The third is a description of the clock error in the format
-    <strong>"+(-)N [second, minute, hour](s) at M [second, minute, hour](s)"</strong>.
-    For Example "+1 second at 10 seconds" -- the clock is 1 second fast for every 10 seconds
-    of the real time period and "-5 minutes at 5 hours" -- the clock lags 5 minutes
-    for every 5 hours of actual time.
+    The third value is a description of the clock error in the format 
+    <strong>"+(-)N [second, minute, hour](s) at M [second, minute, hour](s)"</strong>. 
+    For Example "+1 second at 10 seconds" -- 
+    the clock is 1 second fast for every 10 seconds of actual time and 
+    "-5 minutes at 5 hours" -- the clock lags 5 minutes for every 5 hours of actual time.
 </p>
 <p>
     You should calculate the real time with the given values.
@@ -41,7 +43,7 @@
 <p>
     <strong>Input:</strong>
     Three arguments.
-    Start etalon time, current wrong time and broken clock descriptions as strings.
+    Correct starting time, current wrong time and broken clock descriptions as strings.
 </p>
 
 <p>
@@ -66,6 +68,6 @@ broken_clock('00:00:00', '00:00:30', '+2 seconds at 6 seconds') ==  '00:00:22'
 
 <p>
     <strong>Precondition:</strong><br>
-    "wrong_time" is later than "etalon_time".
+    "wrong_time" is later than "starting_time".
 
 </p>
