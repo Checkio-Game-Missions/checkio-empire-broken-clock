@@ -47,7 +47,7 @@ api.add_listener(
             'python-27': cover,
             'python-3': cover
         },
-        function_name="broken_clock"
+        DEFAULT_FUNCTION_NAME="broken_clock"
         # checker=None,  # checkers.float.comparison(2)
         # add_allowed_modules=[],
         # add_close_builtins=[],

@@ -12,9 +12,9 @@ cover = """def cover(func, data):
 
 class Referee(RefereeBase):
     TESTS = TESTS
-    EXECUTABLE_PATH = settings.EXECUTABLE_PATH
-    CURRENT_ENV = settings_env.CURRENT_ENV
-    FUNCTION_NAME = "broken_clock"
+    ENVIRONMENTS = settings_env.ENVIRONMENTS
+
+    DEFAULT_FUNCTION_NAME = "broken_clock"
     CALLED_REPRESENTATIONS = {
         "python_3": representations.unwrap_arg_representation,
         "python_2": representations.unwrap_arg_representation,
