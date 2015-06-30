@@ -1,13 +1,10 @@
 from checkio_referee import RefereeBase
-from checkio_referee import representations
+from checkio_referee import representations, covercodes, ENV_NAME
 
 
 import settings_env
-from tests import TESTS
 
-cover = """def cover(func, data):
-    return func(*[str(x) for x in data])
-"""
+from tests import TESTS
 
 
 class Referee(RefereeBase):
@@ -15,13 +12,14 @@ class Referee(RefereeBase):
     ENVIRONMENTS = settings_env.ENVIRONMENTS
 
     DEFAULT_FUNCTION_NAME = "broken_clock"
+    FUNCTION_NAMES = {
+        ENV_NAME.JS_NODE: "brokenClock"
+    }
     CALLED_REPRESENTATIONS = {
-        "python_3": representations.unwrap_arg_representation,
-        "python_2": representations.unwrap_arg_representation,
-        "javascript": representations.unwrap_arg_representation
+        ENV_NAME.PYTHON: representations.unwrap_arg_representation,
+        ENV_NAME.JS_NODE: representations.unwrap_arg_representation
     }
     ENV_COVERCODE = {
-        "python_2": cover,
-        "python_3": cover,
-        "javascript": None
+        ENV_NAME.PYTHON: covercodes.py_unwrap_args,
+        ENV_NAME.JS_NODE: covercodes.js_unwrap_args
     }
